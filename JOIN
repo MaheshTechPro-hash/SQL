@@ -1,0 +1,156 @@
+create table Departments (
+Department_Id INT PRIMARY KEY,
+Department_Name varchar(100) );
+
+create table Employees (
+Employee_Id INT primary key,
+Name varchar(100),
+Department_Id INT,
+Salary INT,
+FOREIGN KEY (Department_Id) REFERENCES Departments(Department_Id)
+);
+
+create table Projects (
+Project_Id INT PRIMARY KEY,
+Project_Name varchar(100),
+Employee_Id INT,
+FOREIGN KEY (Employee_Id) REFERENCES Employees(Employee_Id)
+);
+
+select*from Departments;
+select*from Employees;
+select*from Projects;
+
+INSERT INTO Departments (Department_Id,Department_Name)
+VALUES(1,'HR'),
+      (2,'Finance'),
+      (3,'Engineering'),
+      (4,'Marketing');
+INSERT INTO Employees (Employee_Id,Name,Department_Id,Salary)
+VALUES (101,'Vaibhav',1,50000),
+       (102,'Datta',2,60000),
+       (103,'Rohit',3,70000),
+       (104,'Abhijeet',NULL,55000),
+       (105,'Dipak',3,80000);
+INSERT INTO Projects (Project_Id,Project_Name,Employee_Id)
+VALUES (201,'Alpha',101),
+       (202,'Beta',103),
+       (203,'Gamma',105),
+       (204,'Delta',NULL);
+
+select*from Departments;
+select*from Employees;
+select*from Projects;
+
+
+--1) INNER JOIN
+--List employee names with their department names. Only include those with departments.
+select e.Name,d.Department_Name
+FROM Employees e
+INNER JOIN
+Departments d ON e.Department_Id=d.Department_Id;
+
+
+--2)LEFT JOIN
+--List all employees and their department names (if any).
+select e.Name,d.Department_Name
+FROM Employees e
+LEFT JOIN
+Departments d ON e.Department_Id=d.Department_Id;
+
+
+--3)RIGHT JOIN
+--List all departments and any employees in them. Include departments with no employees.
+select e.Name,d.Department_Name
+FROM Employees e
+RIGHT JOIN
+Departments d ON e.Department_Id=d.Department_Id;
+
+
+--4)FULL OUTER JOIN (Use UNION for MySQL)
+--List all employees and departments, matched where possible
+select e.Name,d.Department_Name
+FROM Employees e
+FULL OUTER JOIN
+Departments d ON e.Department_Id=d.Department_Id;
+
+
+--5)CROSS JOIN
+--Show all combinations of employees and projects.
+select e.Name,p.Project_Name
+FROM Employees e
+CROSS JOIN
+Projects p;
+
+
+--6)Employees with Project Names
+--List all employees and their project names. Include employees with no projects.
+SELECT e.Name, p.Project_Name
+FROM Employees e
+LEFT JOIN
+Projects p ON e.Employee_Id = p.Employee_Id;
+
+
+--7)Projects without Assigned Employees
+--List all project names that are not assigned to any employee.
+SELECT Project_Name
+FROM Projects
+WHERE Employee_Id IS NULL;
+
+
+--8)Employees without Projects
+--List all employees who are not assigned to any project.
+SELECT e.Name
+FROM Employees e
+LEFT JOIN Projects p ON e.Employee_Id = p.Employee_Id
+WHERE p.Employee_Id IS NULL;
+
+
+--9)Departments with No Employees
+--List all departments that don’t have any employees.
+SELECT d.Department_Name
+FROM Departments d
+LEFT JOIN Employees e ON d.Department_Id = e.Department_Id
+WHERE e.Employee_Id IS NULL;
+
+
+--10)Employee-Department-Project Summary
+--List employee name, department name, and project name (if any).
+SELECT e.Name AS Employee_Name, d.Department_Name, p.Project_Name
+FROM Employees e
+LEFT JOIN Departments d ON e.Department_Id = d.Department_Id
+LEFT JOIN Projects p ON e.Employee_Id = p.Employee_Id;
+
+
+--11)Create a View with Employee and Department Info
+--Create a view showing employee name, salary, and department name.
+CREATE VIEW emp_dept_view AS
+SELECT e.Name, e.Salary, d.Department_Name
+FROM Employees e
+LEFT JOIN Departments d ON e.Department_Id = d.Department_Id;
+
+
+--12)Query the View
+--Use the view emp_dept_view to show employees earning more than 60,000.
+SELECT *
+FROM emp_dept_view
+WHERE Salary > 60000;
+
+
+--13)Create a View with Total Salary per Department
+CREATE VIEW dept_salary_view AS
+SELECT d.Department_Name, SUM(e.Salary) AS Total_Salary
+FROM Employees e
+JOIN Departments d ON e.Department_Id = d.Department_Id
+GROUP BY d.Department_Name;
+
+
+--14)View of Employees with or Without Projects
+CREATE VIEW emp_project_view AS
+SELECT e.Name AS Employee_Name, p.Project_Name
+FROM Employees e
+LEFT JOIN Projects p ON e.Employee_Id = p.Employee_Id;
+
+
+--15)DROP VIEW emp_dept_view;
+DROP VIEW emp_dept_view;
