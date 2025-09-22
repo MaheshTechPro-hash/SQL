@@ -1,0 +1,58 @@
+--1) Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA.
+--The CITY table is described as follows:
+
+/*
+| Column Name | Data Type   |
+| ----------- | ----------- |
+| ID          | INT         |
+| NAME        | VARCHAR(17) |
+| COUNTRYCODE | VARCHAR(3)  |
+| DISTRICT    | VARCHAR(20) |
+| POPULATION  | INT         |
+*/
+/*
+| ID | NAME        | COUNTRYCODE | DISTRICT        | POPULATION |
+| -- | ----------- | ----------- | --------------- | ---------- |
+| 1  | New York    | USA         | New York        | 8175133    |
+| 2  | Los Angeles | USA         | California      | 3792621    |
+| 3  | Chicago     | USA         | Illinois        | 2695598    |
+| 4  | Houston     | USA         | Texas           | 21297      |
+| 5  | Phoenix     | USA         | Arizona         | 14456      |
+| 6  | London      | GBR         | England         | 8982000    |
+| 7  | Paris       | FRA         | Île-de-France   | 2148327    |
+| 8  | Tokyo       | JPN         | Tokyo           | 13929286   |
+| 9  | Mumbai      | IND         | Maharashtra     | 12442373   |
+| 10 | Berlin      | DEU         | Berlin          | 3644826    |
+| 11 | Sydney      | AUS         | New South Wales | 5312163    |
+| 12 | São Paulo   | BRA         | São Paulo       | 12176866   |
+*/
+
+-- Create the CITY table
+CREATE TABLE CITY (
+    ID INT PRIMARY KEY,
+    NAME VARCHAR(17),
+    COUNTRYCODE VARCHAR(3),
+    DISTRICT VARCHAR(20),
+    POPULATION INT
+);
+
+-- Insert data into CITY table
+INSERT INTO CITY (ID, NAME, COUNTRYCODE, DISTRICT, POPULATION) VALUES
+(1, 'New York', 'USA', 'New York', 8175133),
+(2, 'Los Angeles', 'USA', 'California', 3792621),
+(3, 'Chicago', 'USA', 'Illinois', 2695598),
+(4, 'Houston', 'USA', 'Texas', 21297),
+(5, 'Phoenix', 'USA', 'Arizona', 14456),
+(6, 'London', 'GBR', 'England', 8982000),
+(7, 'Paris', 'FRA', 'Île-de-France', 2148327),
+(8, 'Tokyo', 'JPN', 'Tokyo', 13929286),
+(9, 'Mumbai', 'IND', 'Maharashtra', 12442373),
+(10, 'Berlin', 'DEU', 'Berlin', 3644826),
+(11, 'Sydney', 'AUS', 'New South Wales', 5312163),
+(12, 'São Paulo', 'BRA', 'São Paulo', 12176866);
+
+SELECT * FROM CITY;
+
+SELECT * FROM CITY
+WHERE COUNTRYCODE = 'USA'
+  AND POPULATION > 100000;
