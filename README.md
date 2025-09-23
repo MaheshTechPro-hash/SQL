@@ -31,3 +31,6 @@ All SQL code is included in the `.sql` file in this repository.
    CREATE DATABASE StudentDB;
    USE StudentDB;
 
+3. Run the script:  
+   👉 [`Stored Procedure miniproject.sql`](Stored%20Procedure%20miniproject.sql)
+
