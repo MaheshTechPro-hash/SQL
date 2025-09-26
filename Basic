@@ -19,3 +19,4 @@ INSERT INTO students (name, course, marks) VALUES
 
 -- Select Data
 SELECT * FROM students;
+ 
