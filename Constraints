@@ -13,9 +13,11 @@ CREATE TABLE Students (
     CONSTRAINT fk_course FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)  -- FOREIGN KEY Constraint
 );
 
+
 -- Create Courses Table
 CREATE TABLE Courses (
     CourseID INT PRIMARY KEY,
     CourseName VARCHAR(100) NOT NULL,
     Credits INT CHECK (Credits BETWEEN 1 AND 10)
 );
+    
