@@ -6,6 +6,7 @@ CREATE TABLE Departments (
 
 SELECT * FROM Departments;
 
+
 -- Employees Table
 CREATE TABLE Employees (
     EmpID INT PRIMARY KEY IDENTITY(1,1),
@@ -18,6 +19,7 @@ CREATE TABLE Employees (
     DeptID INT FOREIGN KEY REFERENCES Departments(DeptID)
 );
 SELECT * FROM Employees;
+
 
 -- Projects Table
 CREATE TABLE Projects (
