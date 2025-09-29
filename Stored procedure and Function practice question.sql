@@ -241,3 +241,88 @@ BEGIN
 END;
 
 
+
+--✅ Step 3: Practice Questions on Functions
+--🔹 Scalar Functions
+--Create a function that takes Marks as input and returns the Grade (A/B/C).
+
+CREATE FUNCTION GetGrade(@Marks INT)
+RETURNS CHAR(1)
+AS
+BEGIN
+    DECLARE @Grade CHAR(1);
+    IF @Marks >= 90 SET @Grade = 'A';
+    ELSE IF @Marks >= 75 SET @Grade = 'B';
+    ELSE IF @Marks >= 40 SET @Grade = 'C';
+    ELSE SET @Grade = 'F';
+    RETURN @Grade;
+END;
+
+
+
+--Write a function to calculate the age of a student from DOB.
+CREATE FUNCTION GetAge(@DOB DATE)
+RETURNS INT
+AS
+BEGIN
+    RETURN DATEDIFF(YEAR, @DOB, GETDATE());
+END;
+
+
+
+--Create a function that returns the full details of a student in one string (Name - Class - Marks).
+CREATE FUNCTION GetStudentDetails(@StudentID INT)
+RETURNS NVARCHAR(200)
+AS
+BEGIN
+    DECLARE @Details NVARCHAR(200);
+    SELECT @Details = Name + ' - ' + Class + ' - ' + CAST(Marks AS NVARCHAR)
+    FROM Students WHERE StudentID = @StudentID;
+    RETURN @Details;
+END;
+
+
+
+--Write a function that checks whether a student has passed or failed (Pass Marks = 40).
+CREATE FUNCTION IsPassed(@Marks INT)
+RETURNS NVARCHAR(10)
+AS
+BEGIN
+    RETURN (CASE WHEN @Marks >= 40 THEN 'Pass' ELSE 'Fail' END);
+END;
+
+
+
+
+--🔹 Table-Valued Functions
+--Write a function that returns all students of a given Class.
+  CREATE FUNCTION GetStudentsByClassFn(@Class NVARCHAR(10))
+RETURNS TABLE
+AS
+RETURN (SELECT * FROM Students WHERE Class = @Class);
+
+
+
+--Create a function that returns all students scoring above a given Marks value.
+CREATE FUNCTION GetStudentsAboveMarksFn(@Marks INT)
+RETURNS TABLE
+AS
+RETURN (SELECT * FROM Students WHERE Marks > @Marks);
+
+
+--Write a function that returns the top N students (N as input).
+CREATE FUNCTION GetTopNStudents(@N INT)
+RETURNS TABLE
+AS
+RETURN (SELECT TOP (@N) * FROM Students ORDER BY Marks DESC);
+
+
+
+--Create a function that returns all students born after a given date.
+CREATE FUNCTION GetStudentsBornAfter(@DOB DATE)
+RETURNS TABLE
+AS
+RETURN (SELECT * FROM Students WHERE DOB > @DOB);
+
+
+
