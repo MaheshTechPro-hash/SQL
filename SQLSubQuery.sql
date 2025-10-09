@@ -21,6 +21,7 @@ CREATE TABLE Employees (
 SELECT * FROM Employees;
 
 
+
 -- Projects Table
 CREATE TABLE Projects (
     ProjectID INT PRIMARY KEY IDENTITY(1,1),
@@ -44,6 +45,7 @@ INSERT INTO Departments (DeptName) VALUES
 ('HR'),
 ('Finance');
 
+
 -- Employees
 INSERT INTO Employees (FirstName, LastName, Email, Phone, HireDate, Salary, DeptID) VALUES
 ('Rahul', 'Patil', 'rahul.patil@example.com', '9876543210', '2020-01-15', 50000, 1),
@@ -56,6 +58,7 @@ INSERT INTO Projects (ProjectName, DeptID) VALUES
 ('Website Development', 1),
 ('HR Portal', 2),
 ('Payroll System', 3);
+
 
 -- EmployeeProjects
 INSERT INTO EmployeeProjects (EmpID, ProjectID, Role) VALUES
@@ -92,10 +95,12 @@ SELECT FirstName, LastName, HireDate
 FROM Employees
 WHERE HireDate > '2020-01-01';
 
+
 -- Employees who earn more than the average salary
 SELECT FirstName, LastName, Salary
 FROM Employees
 WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
 
 --Departments that have employees earning above 60,000
 SELECT DeptName
