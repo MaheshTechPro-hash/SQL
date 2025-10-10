@@ -3,6 +3,7 @@
 This is a simple **Student Management System** project using **Stored Procedures in SQL Server**.  
 All SQL code is included in the `.sql` file in this repository.
 
+
 ---
 
 ## 📂 Features
@@ -14,6 +15,7 @@ All SQL code is included in the `.sql` file in this repository.
 - Update student marks
 - Delete student record
 
+
 ---
 
 ## ⚙️ Technologies Used
@@ -23,7 +25,9 @@ All SQL code is included in the `.sql` file in this repository.
 
 ---
 
+
 ## 🛠️ How to Use
+
 
 1. Open **SQL Server Management Studio (SSMS)**
 2. Create a new database (optional):
