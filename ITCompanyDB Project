@@ -115,15 +115,19 @@ BEGIN
 END;
 GO
 
-
 -- Use Stored Procedure
 EXEC GetEmployeesByDept @DeptName = 'Development';
 
 EXEC AssignEmployeeToProject @EmpID=2, @ProjectID=2, @Role='Tester';
 
+
+
 -- Use Function
 SELECT dbo.fn_GetAnnualSalary(1) AS AnnualSalary;
 SELECT dbo.fn_GetFullName(3) AS FullName;
 
+
+
 -- Trigger Test (Try to decrease salary)
 UPDATE Employee SET Salary = 40000 WHERE EmpID = 1; -- ❌ will fail
+
