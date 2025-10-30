@@ -4,6 +4,8 @@ CREATE TABLE Departments (
     DeptName VARCHAR(50) NOT NULL
 );
 
+
+
 SELECT * FROM Departments;
 
 
